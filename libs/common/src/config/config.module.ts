@@ -8,6 +8,7 @@ import * as Joi from 'joi';
       validationSchema: Joi.object({
         MONGODB_URI: Joi.string().required(),
       }),
+      isGlobal: true,
     }),
   ],
 })
