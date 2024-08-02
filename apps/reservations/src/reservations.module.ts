@@ -2,10 +2,17 @@ import { Module } from '@nestjs/common';
 import { ReservationsService } from './reservations.service';
 import { ReservationsController } from './reservations.controller';
 import { DatabaseModule } from '@app/common';
+import { ReservationsRepository } from './reservations.repository';
+import { ReservationSchema } from './models/reservation.schema';
 
 @Module({
-  imports: [DatabaseModule],
+  imports: [
+    DatabaseModule,
+    DatabaseModule.forFeautre([
+      { name: ReservationsService.name, schema: ReservationSchema },
+    ]),
+  ],
   controllers: [ReservationsController],
-  providers: [ReservationsService],
+  providers: [ReservationsService, ReservationsRepository],
 })
 export class ReservationsModule {}
