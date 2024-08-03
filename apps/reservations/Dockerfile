@@ -2,8 +2,7 @@ FROM node:alpine As development
 
 WORKDIR /usr/src/app
 
-COPY package.json /.
-COPY yarn.lock /.
+COPY package.json yarn.lock ./
 
 RUN yarn install
 
@@ -18,13 +17,10 @@ ENV NODE_ENV=${NODE_ENV}
 
 WORKDIR /usr/src/app
 
-COPY package.json /.
-COPY yarn.lock /.
-
-RUN npm install -g yarn
+COPY package.json yarn.lock ./
 
 RUN yarn install --production=true
 
-COPY --from=development /usr/app/src/dist ./dist
+COPY --from=development /usr/src/app/dist ./dist
 
 CMD ["node", "dist/apps/reservations/main"]
