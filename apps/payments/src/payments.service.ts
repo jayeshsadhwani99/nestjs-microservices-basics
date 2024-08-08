@@ -27,7 +27,10 @@ export class PaymentsService {
       payment_method: 'pm_card_visa',
     });
 
-    this.notificationService.emit('notify_email', { email });
+    this.notificationService.emit('notify_email', {
+      email,
+      test: `Your payment of $${amount} has been done successfully`,
+    });
 
     return paymentIntent;
   }

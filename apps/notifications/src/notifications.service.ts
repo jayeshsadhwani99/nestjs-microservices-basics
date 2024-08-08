@@ -18,13 +18,13 @@ export class NotificationsService {
     },
   });
 
-  async notifyEmail({ email }: NotifyEmailDto) {
+  async notifyEmail({ email, text }: NotifyEmailDto) {
     console.log(email);
     this.transporter.sendMail({
       from: this.configService.get('SMTP_USER'),
       to: email,
       subject: 'Sleepr Notification',
-      text: 'This is a test',
+      text,
     });
   }
 }
