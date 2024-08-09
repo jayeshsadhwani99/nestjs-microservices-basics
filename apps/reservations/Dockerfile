@@ -2,11 +2,15 @@ FROM node:alpine As development
 
 WORKDIR /usr/src/app
 
-COPY package.json yarn.lock ./
+COPY package.json ./
+COPY yarn.lock ./
 
 RUN yarn install
 
-COPY . .
+# Adjust paths to correctly point to the 'reservations' app and its tsconfig.json
+COPY apps/reservations ./apps/reservations
+COPY apps/reservations/tsconfig.app.json ./apps/reservations/tsconfig.json
+COPY libs ./libs
 
 RUN yarn build
 
@@ -17,7 +21,8 @@ ENV NODE_ENV=${NODE_ENV}
 
 WORKDIR /usr/src/app
 
-COPY package.json yarn.lock ./
+COPY package.json ./
+COPY yarn.lock ./
 
 RUN yarn install --production=true
 
