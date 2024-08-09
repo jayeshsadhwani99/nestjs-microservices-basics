@@ -7,10 +7,7 @@ COPY yarn.lock ./
 
 RUN yarn install
 
-# Adjust paths to correctly point to the 'reservations' app and its tsconfig.json
-COPY apps/reservations ./apps/reservations
-COPY apps/reservations/tsconfig.app.json ./apps/reservations/tsconfig.json
-COPY libs ./libs
+COPY . .
 
 RUN yarn build
 
