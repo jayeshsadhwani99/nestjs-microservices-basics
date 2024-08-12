@@ -3,10 +3,12 @@ FROM node:alpine As development
 WORKDIR /usr/src/app
 
 COPY package.json yarn.lock ./
+COPY tsconfig.json tsconfig.json
 
 RUN yarn install
 
-COPY . .
+COPY apps/auth apps/auth
+COPY libs libs
 
 RUN yarn build
 
